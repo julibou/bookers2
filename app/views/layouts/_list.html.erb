@@ -10,12 +10,23 @@
   <tbody>
     <tr></tr>
   <tr>
-	  <th>name</th>
-	  <th><%= user.name %></th>
+	  <td>name</td>
+	  <td><%= user.name %></td>
   </tr>
   <tr>
-	  <th>introduction</th>
+	  <td>introduction</td>
+	  <td><%= user.introduction %></td>
+  </tr>
+   <th>introduction</th>
 	  <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+    <th>follows</th>
+    <th><%= link_to user.followings.count, user_followings_path(user) %></th>
+  </tr>
+  <tr>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, user_followers_path(user) %></th>
   </tr>
  </tbody>
 </table>
