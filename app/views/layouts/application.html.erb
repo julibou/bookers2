@@ -23,7 +23,6 @@
             <ul class="navbar-nav ml-auto">
 
      <% if user_signed_in? %>
-
        <li class="nav-item">
       <%= link_to 'Home', user_path(current_user.id), class: "fas fa-home nav-link text-light" %>
       </li>
@@ -53,12 +52,21 @@
       </nav>
     </header>
 
+<% if user_signed_in? %>
+<%= form_with(url: search_path, method: :get,local:true) do |f| %>
+<%= f.select :range ,[['---選択してください---',''], ['User','1'], ['Book','2']] %>
+<%= f.select :search, [["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]] %>
+<%= f.text_field (:word) %>
+<%= f.submit "検索" %>
+<% end %>
+<% end %>
 
- <% flash.each do |key, value| %>
+    <% if user_signed_in? %>
+    <% flash.each do |key, value| %>
     <%= content_tag(:div, value, class: "#{key}") %>
-  <% end %>
-
-    <%= yield %>
+    <% end %>
+<% end %>
+  <%= yield %>
 
  <footer>
   <div class="container mt-5">
@@ -70,7 +78,8 @@
   </div>
  </footer>
 
-  </body>
+ </body>
 </html>
+
 
 
